@@ -21,15 +21,18 @@ def calc_jacobian(X,p):
         1. ** for exponentiation
     """
 
-    N=X.shape[0]
-    D=p.shape[0]
-    J=np.zeros((N,D))
-
-    ### Your job starts here ###
-
-    raise NotImplementedError() #DELETE AND ADD YOUR CODE
-
-    ### Your job ends here ###
+    N = X.shape[0]
+    D = p.shape[0]
+    J = np.zeros((N,D))
+    a, b, c, d = p[0, 0], p[1, 0], p[2, 0], p[3, 0]
+    for r in range(N):
+        x = X[r][0]
+        J[r, 0] = x ** b                # ∂f/∂a
+        J[r, 1] = a * x ** b * np.log(x) # ∂f/∂b
+        J[r, 2] = x                     # ∂f/∂c
+        J[r, 3] = 1                     # ∂f/∂d
+        
+    
 
     return J
 
