@@ -56,14 +56,29 @@ def nonlinear_regression_gn(X, Y, initialP):
            that code as _part_ of your solution here)
     """
 
-    p=np.copy(initialP)
-
-    ### Your job starts here ###
+    p = np.copy(initialP)
 
     for iteration in range(GAUSS_NEWTON_ITERATIONS): #PLEASE do not change this line
-      raise NotImplementedError() #DELETE AND ADD YOUR CODE
+        # calculate predictions using current p
+        predictions = model_function(X, p)
 
-    ### Your job ends here ###
+        # calculate residuals
+        residuals = Y - predictions
+
+        # calculate Jacobian using calc_jacobian(X, p)
+        J = calc_jacobian(X, p)
+
+        # calculate the parameter adjustment
+        delta_p = np.matmul(
+            np.matmul(
+                np.linalg.inv(np.matmul(J.transpose(), J)),
+                J.transpose()
+            ),
+            residuals
+        )
+
+        # update parameters
+        p = p + delta_p
     return p
 
 GRADIENT_DESCENT_ITERATIONS=100000
