@@ -20,8 +20,7 @@ def linear_regression(X, Y):
         3. np.linalg.inv: for matrix inversion
     """
 
-    A = np.copy(X) # We're using vectors (rows of X) as inputs values as in slide 24,
-                   # so X is literally our A matrix
+    A = np.copy(X)
 
     p = np.matmul(np.matmul(np.linalg.inv(np.matmul(A.transpose(), A)), A.transpose()), Y)
 
