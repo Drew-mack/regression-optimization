@@ -81,8 +81,8 @@ def nonlinear_regression_gn(X, Y, initialP):
         p = p + delta_p
     return p
 
-GRADIENT_DESCENT_ITERATIONS=100000
-LEARNING_RATE=1e-6 #WARNING, this is probably too small!
+GRADIENT_DESCENT_ITERATIONS = 100000
+LEARNING_RATE = 1e-5 #WARNING, this is probably too small!
 def nonlinear_regression_gd(X, Y, initialP):
     """
     Estimate parameters for model function a*(x**b)+c*x+d
@@ -101,17 +101,26 @@ def nonlinear_regression_gd(X, Y, initialP):
            that code, refer to slide 24)
     """
 
-    p=np.copy(initialP)
+    p = np.copy(initialP)
 
-    ### Your job starts here ###
-
-
-    for iteration in range(GRADIENT_DESCENT_ITERATIONS): #PLEASE do not change this line
-      raise NotImplementedError() #DELETE AND ADD YOUR CODE
+    for iteration in range(GRADIENT_DESCENT_ITERATIONS):
     # PLEASE use LEARNING_RATE variable defined above
+        # calculate predictions using current p
+        predictions = model_function(X, p)
+
+        # calculate residuals
+        residuals = Y - predictions
+
+        # calculate jacobian
+        J = calc_jacobian(X, p)
+
+        # calculate gradient of squared error
+        G = -2 * np.matmul(J.transpose(), residuals)
+
+        # update parameters using alpha
+        p = p - LEARNING_RATE * G
 
 
-    ### Your job ends here ###
     return p
 
 ##############################################################################
